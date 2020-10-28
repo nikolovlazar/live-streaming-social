@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const twitterHandle = process.env.TWITTER_HANDLE;
+const prefix = '🔴 LIVE - ';
 
 if (!twitterHandle) {
   console.error('No twitter handle defined in .env!!');
@@ -11,8 +12,8 @@ if (!twitterHandle) {
 }
 
 const client = new Twitter({
-  subdomain: "api",
-  version: "1.1",
+  subdomain: 'api',
+  version: '1.1',
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
   access_token_key: process.env.ACCESS_TOKEN_KEY,
@@ -25,13 +26,13 @@ client.get('users/lookup', {
   screen_name: twitterHandle
 })
   .then(data => {
-    const name = data[0].name.replace('🔴 LIVE - ', '');
+    const name = data[0].name.replace(prefix, '');
 
     client.post('account/update_profile', {
-      name: isLive ? `🔴 LIVE - ${name}` : name
+      name: isLive ? `${prefix}${name}` : name
     })
       .then(() => {
-        console.log("Success!");
+        console.log('Success!');
         process.exit(0);
       })
       .catch(err => {
