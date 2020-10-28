@@ -25,7 +25,7 @@ client.get('users/lookup', {
   screen_name: twitterHandle
 })
   .then(data => {
-    const name = data[0].name;
+    const name = data[0].name.replace('🔴 LIVE - ', '');
 
     client.post('account/update_profile', {
       name: isLive ? `🔴 LIVE - ${name}` : name
