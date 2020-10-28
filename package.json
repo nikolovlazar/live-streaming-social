@@ -1,0 +1,11 @@
+{
+  "name": "twitter-live-streaming",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "twitter-lite": "^0.14.0"
+  }
+}
